@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from typing import List
 import uuid
 from .. import hashing
+from ..oauth2 import get_current_user
 
 get_db = database.get_db
 IMGDIR = "images/"
@@ -15,7 +16,7 @@ router = APIRouter(
 
 
 @router.post('/register')
-def create_user(request: schemas.User , db:Session = Depends(get_db)):
+def register_user(request: schemas.User , db:Session = Depends(get_db)):
 
     hashed_password = hashing.Hash.bcrypt(request.password)
 
@@ -27,15 +28,40 @@ def create_user(request: schemas.User , db:Session = Depends(get_db)):
     
     return new_user
 
-@router.post('/{user_id}/upload-photo')
-async def upload_photo(user_id:int, file: UploadFile = File(...), db: Session = Depends(get_db)):
+# @router.post('/{user_id}/upload-photo')
+# async def upload_photo(user_id:int, file: UploadFile = File(...), db: Session = Depends(get_db)):
 
-        user = db.query(models.User).filter(models.User.id == user_id).first()
+#         user = db.query(models.User).filter(models.User.id == user_id).first()
+
+#         if not user:
+#              raise HTTPException(status_code= status.HTTP_404_NOT_FOUND)
+        
+
+
+#         file.filename = f"{uuid.uuid4()}.jpg"
+#         contents = await file.read()
+
+#         with open(f"{IMGDIR}{file.filename}", "wb") as f:
+#             f.write(contents)
+
+
+#         user.photo = f"/images/{file.filename}"
+#         db.commit()
+        
+#         return  file.filename
+
+
+@router.post('/upload-photo')
+async def upload_photo(user_id:int, 
+                       file: UploadFile = File(...), 
+                       db: Session = Depends(get_db),
+                       current_user: schemas.User = Depends(get_current_user)):
+
+        user = db.query(models.User).filter(models.User.username == current_user.username).first()
 
         if not user:
              raise HTTPException(status_code= status.HTTP_404_NOT_FOUND)
         
-
 
         file.filename = f"{uuid.uuid4()}.jpg"
         contents = await file.read()
@@ -48,3 +74,16 @@ async def upload_photo(user_id:int, file: UploadFile = File(...), db: Session = 
         db.commit()
         
         return  file.filename
+
+@router.put('/update')
+def update_profile(
+                    user: schemas.UpdateUser,
+                    db:Session = Depends(get_db),
+                    current_user : schemas.User = Depends(get_current_user),
+                   ):
+    db.query(models.User).filter(models.User.username == current_user.username).update(user.dict(exclude_unset=True), synchronize_session=False)
+    db.commit()
+
+    return {"Status":"Updated"}
+
+    

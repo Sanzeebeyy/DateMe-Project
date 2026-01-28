@@ -27,5 +27,6 @@ def verify_access_token(oauth2_token : str, credential_exception):
         if username is None:
             raise credential_exception
         token_data = TokenData(username= username)
+        return token_data
     except JWTError:
         raise credential_exception

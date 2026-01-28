@@ -18,6 +18,13 @@ class Like(Base):
     to_user = relationship("User", foreign_keys=[to_user_id], back_populates="liked_from") 
     # backpopulates: Example, my side, my gf, her side, her bf okaeyyy
 
+class Reject(Base):
+    __tablename__ = "rejects"
+
+    id = Column(Integer, primary_key=True, index = True)
+    from_user_id = Column(Integer, ForeignKey("users.id"))
+    to_user_id = Column(Integer, ForeignKey("users.id"))
+
 
 class User(Base):
     __tablename__ = "users"

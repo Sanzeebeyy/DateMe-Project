@@ -14,33 +14,68 @@ router = APIRouter(
 
 
 
-@router.get('/', response_model = List[schemas.ShowUsers])
-def show_people(db:Session = Depends(get_db), current_user: schemas.User = Depends(get_current_user)):
-    users = db.query(models.User).all()
+@router.get('/' ,response_model = List[schemas.ShowUsers])
+def show_people(db:Session = Depends(get_db), 
+                current_user: schemas.User = Depends(get_current_user)
+                ):
+    
+    user= db.query(models.User).filter(models.User.username == current_user.username).first()
+
+    current_user_id = user.id 
+
+    rejected_ids = db.query(models.Reject.to_user_id).filter(models.Reject.from_user_id == current_user_id)
+
+    # .to_user_id to get just the user id, nothing else like there are things like from_user_id in Reject table, to NOT get those, we do Reject.to_user_id
+
+    liked_ids = db.query(models.Like.to_user_id).filter(models.Like.from_user_id == current_user_id)
+
+    users = db.query(models.User).filter(
+        models.User.id != current_user_id, #to notShow afailai to like/dis
+        ~models.User.id.in_(rejected_ids), #~ means ! in SQL Alchemy
+        ~models.User.id.in_(liked_ids) # .in_ means in ofc, user id must not be in liked ids gg
+    ).all()
+
     if not users:
         raise HTTPException(status_code= status.HTTP_404_NOT_FOUND ,detail="No users found")
     return users
 
 
+@router.post('/reject')
+def reject(request: schemas.RejectRequest, db:Session = Depends(get_db),
+           current_user: schemas.User = Depends(get_current_user)):
+
+    user = db.query(models.User).filter(models.User.username == current_user.username).first()
+    current_user_id = user.id
+
+    reject = models.Reject(to_user_id = request.to_user_id, from_user_id = current_user_id)
+    db.add(reject)
+    db.commit()
+
+    return {"Rejected":True}
 
 
-@router.post('/like/{to_user_id}')
-def like(to_user_id:int ,request: schemas.LikeRequest , db:Session = Depends(get_db)):
+@router.post('/like')
+def like(request: schemas.LikeRequest , 
+         db:Session = Depends(get_db),
+         current_user: schemas.User = Depends(get_current_user)):
     
-    existing_like = db.query(models.Like).filter(models.Like.from_user_id == request.from_user_id, 
-    models.Like.to_user_id == to_user_id).first()
+    user = db.query(models.User).filter(models.User.username == current_user.username).first()
+    current_user_id = user.id 
+
+    existing_like = db.query(models.Like).filter(models.Like.from_user_id == current_user_id, 
+    models.Like.to_user_id == request.to_user_id).first()
 
     if existing_like:
         return {"Match":False}
     
-    if not existing_like:
-        new_like = models.Like(from_user_id = request.from_user_id, to_user_id = to_user_id)
-        db.add(new_like)
-        db.commit()
+    
+    new_like = models.Like(from_user_id = current_user_id, to_user_id = request.to_user_id)
+    db.add(new_like)
+    db.commit()
 
     reverse_like = db.query(models.Like).filter( 
-    models.Like.to_user_id == request.from_user_id, 
-    models.Like.from_user_id == to_user_id).first()
+    models.Like.to_user_id == current_user_id, 
+    models.Like.from_user_id == request.to_user_id).first()
 
     if reverse_like:
         return {"Match":True}
@@ -48,3 +83,31 @@ def like(to_user_id:int ,request: schemas.LikeRequest , db:Session = Depends(get
 
     return {"Match":False}
 
+
+# Initially did this to like from and to
+
+# @router.post('/like/{to_user_id}')
+# def like(to_user_id:int ,request: schemas.LikeRequest , db:Session = Depends(get_db)):
+    
+
+
+#     existing_like = db.query(models.Like).filter(models.Like.from_user_id == request.from_user_id, 
+#     models.Like.to_user_id == to_user_id).first()
+
+#     if existing_like:
+#         return {"Match":False}
+    
+#     if not existing_like:
+#         new_like = models.Like(from_user_id = request.from_user_id, to_user_id = to_user_id)
+#         db.add(new_like)
+#         db.commit()
+
+#     reverse_like = db.query(models.Like).filter( 
+#     models.Like.to_user_id == request.from_user_id, 
+#     models.Like.from_user_id == to_user_id).first()
+
+#     if reverse_like:
+#         return {"Match":True}
+
+
+#     return {"Match":False}

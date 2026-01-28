@@ -11,18 +11,31 @@ class User(BaseModel):
     class Config:
         orm_mode = True
 
+class UpdateUser(BaseModel):
+    name: str|None = None
+    age: int|None = None
+    gender: str|None = None
+    bio: str|None = None
+
 
 class ShowUsers(BaseModel):
     name: str
     age: int
     gender: str
     bio: str
-    photo:str
+    photo:str|None = None
     
     class Config:
         orm_mode = True
 
 class LikeRequest(BaseModel):
+    # from_user_id:int
+    to_user_id:int
+
+    class Config:
+        orm_mode = True
+
+class RejectRequest(BaseModel):
     from_user_id:int
 
     class Config:
