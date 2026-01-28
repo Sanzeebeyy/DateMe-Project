@@ -2,12 +2,8 @@ from .database import Base
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 
-
-
-
 class Like(Base):
     __tablename__ = "likes"
-
 
     id = Column(Integer, primary_key=True, index = True)
     from_user_id = Column(Integer, ForeignKey("users.id"))     
@@ -30,7 +26,7 @@ class User(Base):
     __tablename__ = "users"
 
     id=  Column(Integer, primary_key=True, index = True)
-    username = Column(String)
+    username = Column(String, unique=True)
     name = Column(String)
     password = Column(String)
     age = Column(Integer)
