@@ -40,22 +40,22 @@ def show_people(db:Session = Depends(get_db),
     return users
 
 
-@router.post('/reject')
-def reject(request: schemas.RejectRequest, db:Session = Depends(get_db),
+@router.post('/reject/{to_user_id}')
+def reject(to_user_id: int, db:Session = Depends(get_db),
            current_user: schemas.User = Depends(get_current_user)):
 
     user = db.query(models.User).filter(models.User.username == current_user.username).first()
     current_user_id = user.id
 
-    reject = models.Reject(to_user_id = request.to_user_id, from_user_id = current_user_id)
+    reject = models.Reject(to_user_id = to_user_id, from_user_id = current_user_id)
     db.add(reject)
     db.commit()
 
     return {"Rejected":True}
 
 
-@router.post('/like')
-def like(request: schemas.LikeRequest , 
+@router.post('/like/{to_user_id}')
+def like(to_user_id:int,
          db:Session = Depends(get_db),
          current_user: schemas.User = Depends(get_current_user)):
     
@@ -63,19 +63,19 @@ def like(request: schemas.LikeRequest ,
     current_user_id = user.id 
 
     existing_like = db.query(models.Like).filter(models.Like.from_user_id == current_user_id, 
-    models.Like.to_user_id == request.to_user_id).first()
+    models.Like.to_user_id == to_user_id).first()
 
     if existing_like:
         return {"Match":False}
     
     
-    new_like = models.Like(from_user_id = current_user_id, to_user_id = request.to_user_id)
+    new_like = models.Like(from_user_id = current_user_id, to_user_id = to_user_id)
     db.add(new_like)
     db.commit()
 
     reverse_like = db.query(models.Like).filter( 
     models.Like.to_user_id == current_user_id, 
-    models.Like.from_user_id == request.to_user_id).first()
+    models.Like.from_user_id == to_user_id).first()
 
     if reverse_like:
         return {"Match":True}
