@@ -18,6 +18,11 @@ router = APIRouter(
 @router.post('/register')
 def register_user(request: schemas.User , db:Session = Depends(get_db)):
 
+    user = db.query(models.User).filter(models.User.username == request.username).first()
+
+    if user:
+         return {f"The user with username '{user.username}' already exists!"}
+
     hashed_password = hashing.Hash.bcrypt(request.password)
 
     new_user = models.User(username = request.username, name = request.name, password = hashed_password, age = request.age, gender = request.gender, bio = request.bio)
