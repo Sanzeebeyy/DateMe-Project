@@ -78,10 +78,51 @@ def like(to_user_id:int,
     models.Like.from_user_id == to_user_id).first()
 
     if reverse_like:
-        return {"Match":True}
+
+        existing_chat = db.query(models.Chat).filter(
+            ((models.Chat.user1_id == current_user_id) & 
+            (models.Chat.user2_id == to_user_id)) |
+            ((models.Chat.user2_id == current_user_id) & 
+            (models.Chat.user1_id == to_user_id))
+        ).first()
+
+        if not existing_chat:
+            chat = models.Chat(
+                user1_id = current_user_id,
+                user2_id = to_user_id
+            )
+            db.add(chat)
+            db.commit()
+
+        return {"Match":True,
+                "chat_id":existing_chat.id if existing_chat else chat.id}
 
 
     return {"Match":False}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Initially did this to like from and to

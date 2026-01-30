@@ -1,6 +1,7 @@
 from .database import Base
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
 class Like(Base):
     __tablename__ = "likes"
@@ -36,3 +37,26 @@ class User(Base):
 
     liked_from = relationship("Like", foreign_keys=[Like.from_user_id]  , back_populates="to_user")
     liked_to = relationship("Like", foreign_keys=[Like.to_user_id] , back_populates="from_user")
+
+
+class Chat(Base):
+    __tablename__ = "chats"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user1_id = Column(Integer, ForeignKey("users.id"))
+    user2_id = Column(Integer, ForeignKey("users.id"))
+
+    messages = relationship("Message", back_populates="chat")
+
+
+
+class Message(Base):
+    __tablename__ = "messages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    chat_id = Column(Integer, ForeignKey("chats.id"))
+    sender_id = Column(Integer, ForeignKey("users.id"))
+    message_text = Column(String)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    chat = relationship("Chat", back_populates="messages")

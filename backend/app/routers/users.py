@@ -7,7 +7,7 @@ from .. import hashing
 from ..oauth2 import get_current_user
 
 get_db = database.get_db
-IMGDIR = "images/"
+IMGDIR = "static/images/"
 
 router = APIRouter(
     tags=["Users"],
@@ -57,8 +57,7 @@ def register_user(request: schemas.User , db:Session = Depends(get_db)):
 
 
 @router.post('/upload-photo')
-async def upload_photo(user_id:int, 
-                       file: UploadFile = File(...), 
+async def upload_photo( file: UploadFile = File(...), 
                        db: Session = Depends(get_db),
                        current_user: schemas.User = Depends(get_current_user)):
 
@@ -75,7 +74,7 @@ async def upload_photo(user_id:int,
             f.write(contents)
 
 
-        user.photo = f"/images/{file.filename}"
+        user.photo = f"static/images/{file.filename}"
         db.commit()
         
         return  file.filename

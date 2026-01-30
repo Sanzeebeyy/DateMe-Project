@@ -2,6 +2,13 @@ from datetime import datetime, timedelta
 from jose import jwt, JWTError
 from .schemas import Token,  TokenData
 
+from fastapi import WebSocket, status, HTTPException
+from . import models, database
+from sqlalchemy.orm import Session
+from jose import jwt, JWTError
+
+get_db = database.get_db
+
 SECRET_KEY = "afc272d9efa4a8a16df8109486cd6a06223ee12fc71e0383a7648f8d743b57db"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRY_MINUTES = 60
@@ -30,3 +37,20 @@ def verify_access_token(oauth2_token : str, credential_exception):
         return token_data
     except JWTError:
         raise credential_exception
+    
+# this will be called from ws_chat.py, so no Depends
+async def get_current_user_ws(websocket:WebSocket, db:Session):
+    token = websocket.query_params.get("token")
+
+    if not token:
+        await websocket.close(code=status.WS_1008_POLICY_VIOLATION)
+        return
+    
+    payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    username: str = payload.get("sub")
+
+    user = db.query(models.User).filter(
+        models.User.username == username
+    ).first()
+
+    return user

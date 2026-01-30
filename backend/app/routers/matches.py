@@ -7,6 +7,14 @@ from ..oauth2 import get_current_user
 
 get_db = database.get_db
 
+# A match means:
+
+# Mutual interest exists
+
+# Chat is allowed
+
+# No messages necessarily exist yet
+
 router = APIRouter(
     tags= ["Matches"],
     prefix='/match'
