@@ -62,7 +62,11 @@ def show_messages(chat_id:int,
     user= db.query(models.User).filter(models.User.username == current_user.username).first()
     current_user_id = user.id 
 
-    chat = db.query(models.Chat).filter(models.Chat.id == chat_id).first()
+    chat = db.query(models.Chat).filter(models.Chat.id == chat_id).first() 
+
+    if not chat:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
     if current_user_id not in [chat.user1_id, chat.user2_id]:
         raise HTTPException(status_code=403, detail="Not allowed")
     
