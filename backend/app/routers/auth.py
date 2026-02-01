@@ -28,3 +28,4 @@ def login_user(request: OAuth2PasswordRequestForm = Depends(), db: Session = Dep
                 "username":user.username
             }}
 
+# logout route is not required since access token is stored in just localStroage and frontend can remove it on button press or whatever so no route required
