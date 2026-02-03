@@ -10,7 +10,7 @@ function NavBar() {
                 <li><button>Register</button></li>
             </ul>
         </div>
-        <hr className='nav-hr' color='white'/>
+        <hr className='nav-hr'/>
         </>
     )
 }
