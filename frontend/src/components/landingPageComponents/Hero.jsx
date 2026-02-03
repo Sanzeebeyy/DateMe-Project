@@ -1,6 +1,9 @@
+import Register from '../../pages/registerPage.jsx'
 import './Hero.css'
+import { useState } from 'react'
 
 function Hero() {
+    const [showRegister, setShowRegister] = useState(false)
     return (
         <>
             <div className='hero'>
@@ -37,7 +40,9 @@ function Hero() {
                     </div>
                     
                 </div>
-                <div className='button'>
+                <div onClick={() => {
+                    setShowRegister(true)
+                    }} className='button'>
                     <button>Get Started</button>
                 </div>
                 
@@ -50,6 +55,10 @@ function Hero() {
                     </span>
                 </div>
             </div>
+
+            {showRegister && (<Register isModal onClose={()=>{
+                setShowRegister(false)
+            }}/>)}
         </>
     )
 }
