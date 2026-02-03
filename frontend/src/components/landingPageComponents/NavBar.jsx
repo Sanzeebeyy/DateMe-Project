@@ -1,18 +1,22 @@
 import './NavBar.css'
 import { useState } from 'react';
 import Register from '../../pages/registerPage.jsx'
+import Login from '../../pages/loginPage.jsx'
 
 
 function NavBar() {
 
     const [showRegister,setShowRegister] = useState(false)
+    const [showLogin, setShowLogin] = useState(false)
 
     return (
         <>
         <div className="nav">
             <img src="\1x\logo3.png" alt="logo.png" width={70} />
             <ul className="nav-elements">
-                <li><button>
+                <li><button onClick={()=>{
+                    setShowLogin(true)
+                }}>
                     Login
                     </button></li>
                 <li><button onClick={()=>{
@@ -26,6 +30,9 @@ function NavBar() {
         {showRegister && (<Register isModal onClose={()=>{
                 setShowRegister(false)
             }}/>)}
+        {showLogin && <Login isModal onClose={()=>{
+            setShowLogin(false)
+        }}/>}
         </>
     )
 }
