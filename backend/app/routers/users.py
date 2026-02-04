@@ -21,8 +21,7 @@ def register_user(request: schemas.CreateUser , db:Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.username == request.username).first()
 
     if user:
-         return {f"The user with username '{user.username}' already exists!"}
-
+        raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE,detail="Username already taken")
     hashed_password = hashing.Hash.bcrypt(request.password)
 
     new_user = models.User(username = request.username, password = hashed_password)

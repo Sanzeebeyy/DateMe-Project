@@ -1,8 +1,42 @@
+import { useState } from "react";
+import api from "../api/axios";
+import { data } from "react-router";
+
 function Register({isModal, onClose}) {
 
-    // const wrapper = isModal ? 'div' : 'div'
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState("")
+
+    const handleRegister = async (e) =>{
+        e.preventDefault();
+
+        setLoading(true)
+        setError("")
+
+
+        try{
+            const response = await api.post('/user/register',{
+                    "username":username,
+                    "password":password,
+                }
+            )
+            if (isModal) onClose()
+            alert("User Registered, Please Login To Continue")
+        }catch(error){
+            setError(error.response?.data?.detail || "Registration Failed")
+        }
+        finally{
+            setLoading(false)
+        }
+    }
+
 
     return (
+
+        
+
 
         <>
             <div className={isModal ? 'fixed inset-0 bg-black/95 flex items-center justify-center z-50' : ''}>
@@ -26,11 +60,22 @@ function Register({isModal, onClose}) {
                             <span>Me</span>
                         </div>
 
-                        <form action="" method="post" className="flex flex-col w-max items-center mx-auto mt-7">
-                            <input type="text" placeholder="Username" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 " />
-                            <input type="password" placeholder="Password" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 mt-5" />
-                            <button className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer ">Register</button>
+                        <form onSubmit={handleRegister} className="flex flex-col w-max items-center mx-auto mt-7">
+                            <input
+                            value={username}
+                            onChange={(e)=>setUsername(e.target.value)} 
+                            type="text" placeholder="Username" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 " />
+                            <input
+                            value={password}
+                            onChange={(e)=>{
+                                setPassword(e.target.value)
+                            }}
+                            type="password" placeholder="Password" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 mt-5" />
+                            <button disabled={loading} className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer ">
+                                {loading ? "Registering User":"Register"}
+                            </button>
                         </form>
+                            {error && <p className="text-red-600 absolute top-10 left-30">{error}</p>}
 
                     </div>
 

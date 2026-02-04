@@ -18,6 +18,10 @@ class CreateUser(BaseModel):
     class Config:
         orm_mode = True
 
+class LoginUser(CreateUser):
+    class Config:
+        orm_mode = True
+
 
 class UpdateUser(BaseModel):
     name: str|None = None
@@ -27,10 +31,10 @@ class UpdateUser(BaseModel):
 
 
 class ShowUsers(BaseModel):
-    name: str
-    age: int
-    gender: str
-    bio: str
+    name: str |None = None
+    age: int |None = None
+    gender: str |None = None
+    bio: str |None = None
     photo:str|None = None
     
     class Config:

@@ -1,11 +1,58 @@
+import { useState } from "react";
+import api from "../api/axios.js";
+import { Navigate, useNavigate } from "react-router";
+
+// inside function Login if we ever make a separate page for login route const wrapper = isModal ? 'div' : 'div'
+
 function Login({isModal, onClose}) {
 
-    // const wrapper = isModal ? 'div' : 'div'
+    const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState("")
+    
+
+
+    const handleLogin = async (e) => {
         e.preventDefault();
-
         // post or fetch
+
+        setLoading(true)
+        setError("")
+
+        try{
+            const formData = new URLSearchParams();
+            formData.append("username",username)
+            formData.append("password",password)
+            formData.append("grant_type", "password");
+
+            const response = await api.post("/login", formData,{
+                headers:{
+                    "Content-type":"application/x-www-form-urlencoded",
+                },
+            })
+
+            if (isModal) onClose()
+
+            localStorage.setItem("token", response.data.access_token)
+            localStorage.setItem("user", JSON.stringify(response.data.user))
+
+            console.log("Log In Successful");
+
+            navigate("/interactions")
+
+        
+        }catch(error){
+            console.log("Full Error",error.response)
+            setError(error.response?.data?.detail || "Login Failed")
+        }finally{
+            setLoading(false)
+        }
+
+
         
     }
 
@@ -33,11 +80,24 @@ function Login({isModal, onClose}) {
                             <span>Me</span>
                         </div>
 
-                        <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col w-max items-center mx-auto mt-7">
-                            <input type="text" placeholder="Username" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 " />
-                            <input type="password" placeholder="Password" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 mt-5" />
-                            <button className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer ">Log In</button>
+                        <form onSubmit={handleLogin} className="flex flex-col w-max items-center mx-auto mt-7">
+                            <input 
+                            value={username} onChange={(e)=>{
+                                setUsername(e.target.value)
+                            }}
+                            type="text" placeholder="Username" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 " />
+                            <input
+                            value={password} onChange={(e)=>{
+                                setPassword(e.target.value)
+                            }}
+                            type="password" placeholder="Password" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 mt-5" />
+                            <button
+                            disabled = {loading}
+                            className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer ">
+                                {loading? "Loggin In...":"Log In"}</button>
+
                         </form>
+                            {error && <p className="text-red-600 absolute top-10 left-40">{error}</p>}
 
                     </div>
 

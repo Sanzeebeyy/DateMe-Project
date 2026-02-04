@@ -17,13 +17,18 @@ function NavBar() {
                 <li><button onClick={()=>{
                     setShowLogin(true)
                 }}>
-                    Login
+                    LogIn
                     </button></li>
                 <li><button onClick={()=>{
                     setShowRegister(true)
                 }}>
                     Register
                     </button></li>
+                <li><button onClick={()=>{
+                    localStorage.removeItem("token")
+                    localStorage.removeItem("user")
+                    window.location.href = "/"
+                }}>LogOut</button></li>
             </ul>
         </div>
         <hr className='nav-hr'/>
