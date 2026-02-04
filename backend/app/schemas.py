@@ -2,14 +2,22 @@ from pydantic import BaseModel
 
 class User(BaseModel):
     username: str
-    name: str
+    name: str |None = None
     password: str
-    age: int
-    gender: str
-    bio: str
+    age: int | None = None
+    gender: str | None = None
+    bio: str | None = None
 
     class Config:
         orm_mode = True
+
+class CreateUser(BaseModel):
+    username: str
+    password: str
+
+    class Config:
+        orm_mode = True
+
 
 class UpdateUser(BaseModel):
     name: str|None = None

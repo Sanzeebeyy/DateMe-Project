@@ -16,7 +16,7 @@ router = APIRouter(
 
 
 @router.post('/register')
-def register_user(request: schemas.User , db:Session = Depends(get_db)):
+def register_user(request: schemas.CreateUser , db:Session = Depends(get_db)):
 
     user = db.query(models.User).filter(models.User.username == request.username).first()
 
@@ -25,7 +25,7 @@ def register_user(request: schemas.User , db:Session = Depends(get_db)):
 
     hashed_password = hashing.Hash.bcrypt(request.password)
 
-    new_user = models.User(username = request.username, name = request.name, password = hashed_password, age = request.age, gender = request.gender, bio = request.bio)
+    new_user = models.User(username = request.username, password = hashed_password)
 
     db.add(new_user)
     db.commit()

@@ -5,7 +5,7 @@ function Register({isModal, onClose}) {
     return (
 
         <>
-            <div className={isModal ? 'fixed inset-0 bg-black/90 flex items-center justify-center z-50' : ''}>
+            <div className={isModal ? 'fixed inset-0 bg-black/95 flex items-center justify-center z-50' : ''}>
 
                 <div className=" relative">
                     {isModal &&

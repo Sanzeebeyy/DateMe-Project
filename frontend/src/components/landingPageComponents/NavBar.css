@@ -10,7 +10,6 @@
     margin: auto;
     padding-bottom: 25px;
 }
-
 .nav img{
     cursor: pointer;
 }
@@ -44,4 +43,5 @@
     max-width: 65vw;
     margin: auto;
     color: white;
+    opacity: 40%;
 }

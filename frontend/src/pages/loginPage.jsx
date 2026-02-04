@@ -2,10 +2,17 @@ function Login({isModal, onClose}) {
 
     // const wrapper = isModal ? 'div' : 'div'
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // post or fetch
+        
+    }
+
     return (
         
         <>
-            <div className={isModal ? 'fixed inset-0 bg-black/90 flex items-center justify-center z-50' : ''}>
+            <div className={isModal ? 'fixed inset-0 bg-black/95 flex items-center justify-center z-50' : ''}>
 
                 <div className=" relative">
                     {isModal &&
@@ -26,7 +33,7 @@ function Login({isModal, onClose}) {
                             <span>Me</span>
                         </div>
 
-                        <form action="" method="post" className="flex flex-col w-max items-center mx-auto mt-7">
+                        <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col w-max items-center mx-auto mt-7">
                             <input type="text" placeholder="Username" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 " />
                             <input type="password" placeholder="Password" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 mt-5" />
                             <button className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer ">Log In</button>
