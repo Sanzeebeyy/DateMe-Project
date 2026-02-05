@@ -2,15 +2,18 @@ import './Nav.css'
 import { useState } from 'react';
 import Register from '../../pages/registerPage.jsx'
 import Login from '../../pages/loginPage.jsx'
+import { useNavigate } from 'react-router';
 
 
 function Nav() {
 
+    const navigate = useNavigate()
 
     return (
         <>
         <div className="nav">
-            <img src="\1x\logo3.png" alt="logo.png" width={70} />
+            <a href="/"><img src="\1x\logo3.png" alt="logo.png" width={70}/></a>
+            
             <ul className="nav-elements">
                 <li>
                     <button>
@@ -25,6 +28,13 @@ function Nav() {
                 <li>
                     <button>
                         Matches
+                    </button>
+                </li>
+                <li>
+                    <button onClick={()=>{
+                        navigate('/user/update')
+                    }}>
+                        Update
                     </button>
                 </li>
                 <li><button onClick={()=>{
