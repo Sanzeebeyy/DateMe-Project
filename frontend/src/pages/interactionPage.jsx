@@ -1,6 +1,6 @@
 function Interactions(){
     return (
-        <div>This is Interactions Page</div>
+        <div className="text-(--secondary-color)">This is Interactions Page</div>
     )
 }
 

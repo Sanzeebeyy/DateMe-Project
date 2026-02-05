@@ -30,7 +30,7 @@ function UpdateUser() {
 
             console.log(response.data)
 
-            navigate("/interactions")
+            navigate("/user/upload-photo")
 
 
         }catch(error){
@@ -53,28 +53,28 @@ function UpdateUser() {
                         onChange={(e) => {
                             setName(e.target.value)
                         }}
-                        type="text" placeholder="name" className=" border-2 border-(--secondary-color) rounded-2xl px-4 py-2 text-(--secondary-color)" />
+                        type="text" placeholder="FullName" className=" border-2 border-(--secondary-color) rounded-2xl px-4 py-2 text-(--secondary-color)" />
 
                     <input
                         value={age}
                         onChange={(e) => {
                             setAge(e.target.value)
                         }}
-                        type="text" placeholder="age" className=" border-2 border-(--secondary-color) rounded-2xl px-4 py-2 text-(--secondary-color)" />
+                        type="text" placeholder="Age" className=" border-2 border-(--secondary-color) rounded-2xl px-4 py-2 text-(--secondary-color)" />
 
                     <input
                         value={gender}
                         onChange={(e) => {
                             setGender(e.target.value)
                         }}
-                        type="text" placeholder="gender" className=" border-2 border-(--secondary-color) rounded-2xl px-4 py-2 text-(--secondary-color)" />
+                        type="text" placeholder="Gender" className=" border-2 border-(--secondary-color) rounded-2xl px-4 py-2 text-(--secondary-color)" />
 
                     <textarea
                         value={bio}
                         onChange={(e) => {
                             setBio(e.target.value)
                         }}
-                        placeholder="describe yourself here.." rows="5" className="border-2 border-(--secondary-color) rounded-2xl text-(--secondary-color) pl-3 pr-11 py-2"></textarea>
+                        placeholder="Describe yourself here.." rows="5" className="border-2 border-(--secondary-color) rounded-2xl text-(--secondary-color) pl-3 pr-11 py-2"></textarea>
 
                     <button disabled={loading} className=" text-(--secondary-color) bg-(--primary-color) px-10 py-5 rounded-3xl cursor-pointer">
                         {loading? "Updating...":"Update"}

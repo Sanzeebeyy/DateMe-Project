@@ -94,7 +94,7 @@ function Login({isModal, onClose}) {
                             <button
                             disabled = {loading}
                             className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer ">
-                                {loading? "Loggin In...":"Log In"}</button>
+                                {loading? "Logging In...":"Log In"}</button>
 
                         </form>
                             {error && <p className="text-red-600 absolute top-10 left-40">{error}</p>}

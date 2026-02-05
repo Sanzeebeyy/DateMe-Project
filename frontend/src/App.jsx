@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router'
 import Interactions from './pages/interactionPage'
 import UpdateUser from './pages/updateUser'
 import './App.css'
+import UploadPhoto from './pages/uploadPhoto'
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/interactions" element={<Interactions />} />
-          {/* <Route path="/profile" element={<Profile />} /> */}
           <Route path="/user/update" element={<UpdateUser />} />
+          <Route path="/user/upload-photo" element={<UploadPhoto/>} />
         </Route>
 
       </Routes>

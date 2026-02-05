@@ -95,7 +95,7 @@ function Register({isModal, onClose}) {
                             }}
                             type="password" placeholder="Password" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 mt-5" />
                             <button disabled={loading} className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer ">
-                                {loading ? "Registering User":"Register"}
+                                {loading ? "Registering...":"Register"}
                             </button>
                         </form>
                             {error && <p className="text-red-600 absolute top-10 left-30">{error}</p>}
