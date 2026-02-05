@@ -5,6 +5,7 @@ import Register from './pages/registerPage'
 import Login from './pages/loginPage'
 import { Routes, Route } from 'react-router'
 import Interactions from './pages/interactionPage'
+import UpdateUser from './pages/updateUser'
 import './App.css'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/interactions" element={<Interactions />} />
           {/* <Route path="/profile" element={<Profile />} /> */}
+          <Route path="/user/update" element={<UpdateUser />} />
         </Route>
 
       </Routes>

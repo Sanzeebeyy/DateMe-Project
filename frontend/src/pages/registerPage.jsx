@@ -1,8 +1,11 @@
 import { useState } from "react";
 import api from "../api/axios";
 import { data } from "react-router";
+import { useNavigate } from "react-router";
 
 function Register({isModal, onClose}) {
+
+    const navigate = useNavigate()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -23,7 +26,27 @@ function Register({isModal, onClose}) {
                 }
             )
             if (isModal) onClose()
-            alert("User Registered, Please Login To Continue")
+
+            
+            const formData = new URLSearchParams();
+            formData.append("username",username)
+            formData.append("password",password)
+            formData.append("grant_type", "password");
+
+            const loginResponse = await api.post("/login", formData,{
+                headers:{
+                    "Content-type":"application/x-www-form-urlencoded",
+                },
+            })
+
+            if (isModal) onClose()
+
+            localStorage.setItem("token", loginResponse.data.access_token)
+            localStorage.setItem("user", JSON.stringify(loginResponse.data.user))
+
+            navigate("/user/update")
+        
+
         }catch(error){
             setError(error.response?.data?.detail || "Registration Failed")
         }
