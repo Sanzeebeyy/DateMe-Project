@@ -35,7 +35,10 @@
 ```bash
 cd backend
 python -m venv .venv
-source venv/bin/activate
+# linux/mac:
+source .venv/bin/activate
+# windows
+./.venv/Scripts/activate 
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
