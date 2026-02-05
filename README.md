@@ -35,14 +35,13 @@
 ```bash
 cd backend
 python -m venv .venv
-# linux/mac:
-source .venv/bin/activate
-# windows
-./.venv/Scripts/activate 
+
+source .venv/bin/activate # for linux/mac
+./.venv/Scripts/activate # for windows
+
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
-<hr>
 
 ### 2. Frontend Setup
 ```bash
