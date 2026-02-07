@@ -94,7 +94,7 @@ function Register({isModal, onClose}) {
                                 setPassword(e.target.value)
                             }}
                             type="password" placeholder="Password" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 mt-5" />
-                            <button disabled={loading} className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer ">
+                            <button disabled={loading} className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer border-2 border-(--primary-color) hover:bg-(--bg-color) ">
                                 {loading ? "Registering...":"Register"}
                             </button>
                         </form>

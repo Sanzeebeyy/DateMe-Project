@@ -93,7 +93,7 @@ function Login({isModal, onClose}) {
                             type="password" placeholder="Password" className="border-2 rounded-xl text-(--secondary-color) pt-3 pb-3 px-7 mt-5" />
                             <button
                             disabled = {loading}
-                            className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer ">
+                            className="my-10 bg-(--primary-color) text-(--secondary-color) py-3 px-10 rounded-2xl cursor-pointer border-2 border-(--primary-color) hover:bg-(--bg-color) ">
                                 {loading? "Logging In...":"Log In"}</button>
 
                         </form>

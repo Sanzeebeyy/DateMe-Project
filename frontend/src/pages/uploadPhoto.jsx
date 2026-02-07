@@ -58,7 +58,7 @@ function UploadPhoto() {
                                     {file.name}
                                 </p>
                             )}
-                    <button disabled={loading} className=" text-(--secondary-color) bg-(--primary-color) px-10 py-5 rounded-3xl cursor-pointer">
+                    <button disabled={loading} className=" text-(--secondary-color) bg-(--primary-color) border-2 border-(--primary-color) hover:bg-(--bg-color) px-10 py-5 rounded-3xl cursor-pointer">
                         {loading ? "Uploading..." : "Upload"}
                     </button>
                     {error && <p className="text-red-500">{error}</p>}

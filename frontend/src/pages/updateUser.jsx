@@ -84,7 +84,7 @@ function UpdateUser() {
                         }}
                         placeholder="Describe yourself here.." rows="5" className="border-2 border-(--secondary-color) rounded-2xl text-(--secondary-color) pl-3 pr-11 py-2"></textarea>
 
-                    <button disabled={loading} className=" text-(--secondary-color) bg-(--primary-color) px-10 py-5 rounded-3xl cursor-pointer">
+                    <button disabled={loading} className=" text-(--secondary-color) bg-(--primary-color) border-2 border-(--primary-color) hover:bg-(--bg-color) px-10 py-5 rounded-3xl cursor-pointer">
                         {loading? "Updating...":"Update"}
                     </button>
                 {error && <p className="text-red-600 text-center">{error}</p>}
