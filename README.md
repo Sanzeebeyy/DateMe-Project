@@ -2,7 +2,7 @@
 
 **DateMe** is a sleek, high-performance dating platform designed to bring people together through a seamless user experience. Built with a lightning-fast **FastAPI** backend and a responsive **React** frontend, it offers a smooth interface for finding, matching, and real-time communication.
 
----
+
 
 ## ✨ Features
 
@@ -12,7 +12,7 @@
 * **Mutual Matching:** When two users like each other, it's a match!
 * **Real-time Chat:** Integrated messaging system to start conversations immediately after matching.
 
----
+
 
 ## 🛠️ Tech Stack
 
@@ -27,7 +27,7 @@
 * **JWT Authentication** - Secure user sessions and data protection.
 * **SQLAlchemy** - Database ORM for persistent storage.
 
----
+
 
 ## 🚀 Getting Started
 
@@ -35,10 +35,8 @@
 ```bash
 cd backend
 python -m venv .venv
-
-source .venv/bin/activate # for linux/mac
-./.venv/Scripts/activate # for windows
-
+source .venv/bin/activate # for Linux / Mac
+./.venv/Scripts/activate # for Windows
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
@@ -49,7 +47,7 @@ cd frontend
 npm install
 npm start
 ```
-<hr>
+
 
 ## 🤝 Contributing
 * Fork the repo.
@@ -58,6 +56,6 @@ npm start
 * Push to the branch (git push origin feature/AmazingFeature).
 * Open a Pull Request.
 
-<hr>
+<hr/>
 
 Developed with lots of love and caffeine by Sanjeeb Poudel
