@@ -26,7 +26,9 @@ function Nav() {
                         </button>
                     </li>
                     <li>
-                        <button>
+                        <button onClick={() => {
+                            navigate('/matches')
+                        }}>
                             <img src="/navIcons/heart_check_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="" />
                         </button>
                     </li>

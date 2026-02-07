@@ -17,7 +17,7 @@
 .nav-elements{
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .nav-elements li{
