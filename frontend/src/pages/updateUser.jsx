@@ -12,11 +12,18 @@ function UpdateUser() {
     const [gender, setGender] = useState("")
     const [bio, setBio] = useState("")
 
+
+    const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
 
     const handleUpdate = async (e) => {
 
         e.preventDefault();
+
+        if ((name | gender | bio  == "") | (age == 0)){
+            setError("Please keep real Details")
+            return;
+        }
         
         setLoading(true)
 
@@ -80,7 +87,9 @@ function UpdateUser() {
                     <button disabled={loading} className=" text-(--secondary-color) bg-(--primary-color) px-10 py-5 rounded-3xl cursor-pointer">
                         {loading? "Updating...":"Update"}
                     </button>
+                {error && <p className="text-red-600 text-center">{error}</p>}
                 </form>
+
 
             </div>
         </>

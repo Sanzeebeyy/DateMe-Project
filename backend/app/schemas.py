@@ -31,6 +31,7 @@ class UpdateUser(BaseModel):
 
 
 class ShowUsers(BaseModel):
+    id: int
     name: str |None = None
     age: int |None = None
     gender: str |None = None

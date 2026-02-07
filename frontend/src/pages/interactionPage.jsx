@@ -1,60 +1,71 @@
 import Nav from "../components/mainPageComponents/Nav.jsx";
+import ProfileCard from "../components/mainPageComponents/ProfileCard.jsx";
 import api from '../api/axios.js'
+import { useEffect, useRef, useState } from "react";
 
 function Interactions() {
 
+    const [users, setUsers] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(0)
+
+
+    useEffect(()=>{
+        fetchUsers()
+    },[])
+
+    const fetchUsers = async () => {
+        try {
+            const response = await api.get('/interaction');
+            setUsers(response.data);
+            setCurrentIndex(0)
+        } catch (error) {
+            if (error.response?.status === 404) {
+                setUsers([]);
+                alert("No Users Left")
+            }
+            console.error("Error fetching users:", error);
+        }
+    }
 
 
 
+    const handleInteraction = async (type) => {
+        const targetUser = users[currentIndex]
+
+        try {
+            await api.post(`/interaction/${type}/${targetUser.id}`)
+
+            setCurrentIndex((prev) => prev + 1)
+        } catch (error) {
+            console.log("Error Occured in Liking/Rejecting ")
+        }
+
+    }
+
+    const currentUser = users[currentIndex]
 
 
 
     return (
         <>
             <Nav></Nav>
+            <div className="flex justify-center">
+                {(currentUser) ?
+                    (<ProfileCard user={currentUser} onAction={handleInteraction} />)
+                    :
+                    (
+                        <div className="flex flex-col items-center">
 
-            <div className="mx-auto mt-16 w-104 rounded-3xl border-6 border-(--primary-color) bg-(--bg-color) shadow-2xl overflow-hidden">
+                            <p className="mt-20 text-center text-(--secondary-color)">No More Profiles to Show</p>
 
+                            <button onClick={fetchUsers}
+                                className="mt-4 text-(--secondary-color) bg-(--primary-color) border border-(--primary-color) px-10 py-5 rounded-2xl cursor-pointer hover:bg-(--bg-color)" >
+                                Start Over</button>
 
-                <div className="relative h-136 overflow-hidden">
-                    <img
-                        src="https://img.freepik.com/free-photo/closeup-scarlet-macaw-from-side-view-scarlet-macaw-closeup-head_488145-3540.jpg?semt=ais_hybrid&w=740&q=80"
-                        alt="parrot"
-                        className="h-full w-full object-cover"
-                    />
-
-
-                    <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
-
-
-                    <div className="absolute bottom-6 left-6 right-6 text-white">
-                        <p className="text-3xl font-bold">Scarlet 🦜</p>
-                        <p className="text-base opacity-90">
-                            Loves flying, mangoes & sunsets
-                        </p>
-
-                        <div className="mt-3 flex gap-5 text-base opacity-90">
-                            <span>Age: 3</span>
-                            <span>Gender: Male</span>
                         </div>
-                    </div>
-                </div>
-
-
-                <div className="flex justify-around py-6">
-                    <button
-                        className="flex h-16 w-16 items-center justify-center rounded-full bg-red-500 text-white text-2xl shadow-xl transition hover:scale-110 hover:bg-red-600"
-                    >
-                        ✕
-                    </button>
-
-                    <button
-                        className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500 text-white text-2xl shadow-xl transition hover:scale-110 hover:bg-green-600"
-                    >
-                        <img src="navIcons\favorite_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="" />
-                    </button>
-                </div>
+                    )}
             </div>
+
 
         </>
     )
