@@ -1,8 +1,10 @@
 import Register from '../../pages/registerPage.jsx'
 import './Hero.css'
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 function Hero() {
+    const navigate = useNavigate()
     const [showRegister, setShowRegister] = useState(false)
     return (
         <>
@@ -37,13 +39,17 @@ function Hero() {
                         </div>
 
                         <span>"Together, Forever"</span>
-                    </div>
-                    
+                    </div>                    
                 </div>
-                <div onClick={() => {
+                <div className='button'>
+                    <button onClick={() => {
                     setShowRegister(true)
-                    }} className='button'>
-                    <button>Get Started</button>
+                    }} >Get Started</button>
+                    <button onClick={()=>{
+                        navigate('/interactions')
+                    }}>
+                        Find Match
+                    </button>
                 </div>
                 
                 <div className='footer'>

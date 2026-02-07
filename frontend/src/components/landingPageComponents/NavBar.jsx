@@ -24,11 +24,11 @@ function NavBar() {
                 }}>
                     Register
                     </button></li>
-                <li><button onClick={()=>{
+                {/* <li><button onClick={()=>{
                     localStorage.removeItem("token")
                     localStorage.removeItem("user")
                     window.location.href = "/"
-                }}>LogOut</button></li>
+                }}>LogOut</button></li> */}
             </ul>
         </div>
         <hr className='nav-hr'/>

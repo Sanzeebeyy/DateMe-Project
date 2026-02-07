@@ -17,7 +17,7 @@ function UpdateUser() {
     const handleUpdate = async (e) => {
 
         e.preventDefault();
-
+        
         setLoading(true)
 
         try {
@@ -43,9 +43,10 @@ function UpdateUser() {
 
     return (
         <>
-            <Nav />
+            <Nav></Nav>
+            
             <div className="container flex flex-col items-center w-[80vw] max-w-200 h-auto border-8 border-(--primary-color)  mx-auto my-20 rounded-4xl gap-6">
-                <p className=" mt-9 font-bold text-3xl text-(--primary-color)  ">Update Your Profile</p>
+                <p className=" mt-9 font-bold text-3xl text-(--primary-color)">Update Your Profile</p>
 
                 <form onSubmit={handleUpdate} className="flex flex-col gap-6 mb-12">
                     <input

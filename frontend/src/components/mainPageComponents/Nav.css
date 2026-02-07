@@ -24,11 +24,11 @@
     list-style: none;
 }
 .nav-elements li button{
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
-    border-radius: 40px;
+    border-radius: 50px;
     border: 1px solid #DC3C3B;
     color: white;
     cursor: pointer;
