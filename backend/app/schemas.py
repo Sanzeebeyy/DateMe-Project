@@ -41,6 +41,13 @@ class ShowUsers(BaseModel):
     class Config:
         orm_mode = True
 
+class ShowOwn(ShowUsers):
+    username:str
+
+    class Config:
+        orm_mode = True
+
+
 class LikeRequest(BaseModel):
     # from_user_id:int
     to_user_id:int

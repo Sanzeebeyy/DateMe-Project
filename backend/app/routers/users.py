@@ -14,6 +14,13 @@ router = APIRouter(
     prefix="/user"
 )
 
+@router.get('/', response_model=schemas.ShowOwn)
+def show_me(db:Session = Depends(get_db),
+            current_user:schemas.User = Depends(get_current_user)):
+    user = db.query(models.User).filter(models.User.username == current_user.username).first()
+
+    return user
+
 
 @router.post('/register')
 def register_user(request: schemas.CreateUser , db:Session = Depends(get_db)):

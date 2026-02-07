@@ -30,7 +30,7 @@ function ProfileCard({user, onAction}){
 
                 <div className="flex justify-around py-6">
                     <button
-                        className="flex h-16 w-16 items-center justify-center rounded-full bg-red-500 text-white text-2xl shadow-xl transition hover:scale-110 hover:bg-red-600 cursor-pointer"
+                        className="flex h-16 w-16 items-center justify-center rounded-full bg-red-500 text-(--secondary-color) text-2xl shadow-xl transition hover:scale-110 hover:bg-red-600 cursor-pointer"
                         onClick={()=>{
                             onAction('reject')
                         }}
@@ -39,7 +39,7 @@ function ProfileCard({user, onAction}){
                     </button>
 
                     <button
-                        className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500 text-white text-2xl shadow-xl transition hover:scale-110 hover:bg-green-600 cursor-pointer"
+                        className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500 text-(--secondary-color) text-2xl shadow-xl transition hover:scale-110 hover:bg-green-600 cursor-pointer"
                         onClick={()=>{
                             onAction('like')
                         }}
