@@ -34,7 +34,7 @@ function Matches() {
                         photo = {match.photo}/>
                     ))
                 ) : (
-                        <p className="text-center text-(--secondary-color)">You have No Matches, Keep Searching</p>
+                        <p className="text-center text-(--secondary-color)">You have No Matches, Keep Liking</p>
             )}
             </div >
         </>

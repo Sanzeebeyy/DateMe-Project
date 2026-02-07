@@ -10,7 +10,7 @@ function Match({ id, name, age, photo, bio }) {
                 />
 
                 <ul className="flex flex-col gap-2.5 flex-1 justify-center text-(--secondary-color)">
-                    <li>
+                    <li className="text-3xl font-bold">
                         {name}
                     </li>
                     <li>

@@ -17,26 +17,26 @@ function Nav() {
                         <button onClick={() => {
                             navigate('/interactions')
                         }} >
-                            <img src="/navIcons/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="" />
+                            <img src="/navIcons/home.svg" alt="" />
                         </button>
                     </li>
                     <li>
                         <button>
-                            <img src="/navIcons/chat_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="" />
+                            <img src="/navIcons/chat.svg" alt="" />
                         </button>
                     </li>
                     <li>
                         <button onClick={() => {
                             navigate('/matches')
                         }}>
-                            <img src="/navIcons/heart_check_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="" />
+                            <img src="/navIcons/matches.svg" alt="" />
                         </button>
                     </li>
                     <li>
                         <button onClick={() => {
                             navigate('/user/update')
                         }}>
-                            <img src="/navIcons/edit_square_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="" />
+                            <img src="/navIcons/update.svg" alt="" />
                         </button>
                     </li>
                     <li><button onClick={() => {
@@ -44,7 +44,7 @@ function Nav() {
                         localStorage.removeItem("user")
                         window.location.href = "/"
                     }}>
-                        <img src="/navIcons/logout_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="" />    
+                        <img src="/navIcons/logout.svg" alt="" />    
                     </button></li>
                 </ul>
             </div>

@@ -44,7 +44,7 @@ function ProfileCard({user, onAction}){
                             onAction('like')
                         }}
                     >
-                        <img src="navIcons\favorite_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png" alt="" />
+                        <img src="navIcons\like.svg" alt="" />
                     </button>
                 </div>
             </div>
