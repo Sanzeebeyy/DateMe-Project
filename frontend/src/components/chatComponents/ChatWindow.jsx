@@ -39,7 +39,6 @@ function ChatWindow({ chatId }) {
         return () => ws.close()
     }, [chatId])
 
-
     //for auto scroll
     useEffect(() => {
         scrollToBottom()
