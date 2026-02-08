@@ -8,6 +8,7 @@ import Interactions from './pages/interactionPage'
 import UpdateUser from './pages/updateUser'
 import UploadPhoto from './pages/uploadPhoto'
 import Matches from './pages/matchesPage'
+import ShowUser from './pages/userPage'
 
 function App() {
   return (
@@ -20,10 +21,13 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
 
         <Route element={<ProtectedRoute />}>
+
           <Route path="/interactions" element={<Interactions />} />
           <Route path="/user/update" element={<UpdateUser />} />
-          <Route path="/user/upload-photo" element={<UploadPhoto/>} />
-          <Route path="/matches" element={<Matches/>} />
+          <Route path="/user/upload-photo" element={<UploadPhoto />} />
+          <Route path="/user" element={<ShowUser />} />
+          <Route path="/matches" element={<Matches />} />
+          
         </Route>
 
       </Routes>

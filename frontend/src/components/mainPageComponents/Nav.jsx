@@ -34,9 +34,9 @@ function Nav() {
                     </li>
                     <li>
                         <button onClick={() => {
-                            navigate('/user/update')
+                            navigate('/user')
                         }}>
-                            <img src="/navIcons/update.svg" alt="" />
+                            <img src="/navIcons/self.svg" alt="" />
                         </button>
                     </li>
                     <li><button onClick={() => {

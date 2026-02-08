@@ -15,6 +15,7 @@ function Interactions() {
 
     const fetchUsers = async () => {
         try {
+            console.log("ma kaam ")
             const response = await api.get('/interaction');
             setUsers(response.data);
             setCurrentIndex(0)
