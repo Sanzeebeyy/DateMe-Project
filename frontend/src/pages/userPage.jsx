@@ -35,7 +35,7 @@ function ShowUser() {
 
             <Nav />
             {/* <div className="text-3xl text-center text-(--secondary-color) font-bold mt-3">You look like this to others</div> */}
-            <div className="mx-auto mt-10 w-104 rounded-3xl border-6 border-(--primary-color) bg-(--bg-color) shadow-2xl overflow-hidden">
+            <div className="mx-auto mt-8 w-104 rounded-3xl border-6 border-(--primary-color) bg-(--bg-color) shadow-2xl overflow-hidden">
 
 
                 <div className="relative h-136 overflow-hidden">{console.log(user)}
@@ -67,34 +67,36 @@ function ShowUser() {
                 <div className="flex justify-around py-6">
                     <button
                         className="flex h-16 w-16 items-center justify-center rounded-full bg-red-500 text-(--secondary-color) text-2xl shadow-xl transition hover:scale-110 hover:bg-red-600 cursor-pointer"
-                        onClick={() => {
-                            onAction('reject')
-                        }}
+                        // onClick={() => {
+                        //     onAction('reject')
+                        // }}
                     >
                         ✕
                     </button>
 
                     <button
                         className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500 text-(--secondary-color) text-2xl shadow-xl transition hover:scale-110 hover:bg-green-600 cursor-pointer"
-                        onClick={() => {
-                            onAction('like')
-                        }}
+                        // onClick={() => {
+                        //     onAction('like')
+                        // }}
                     >
                         <img src="navIcons\like.svg" alt="" />
                     </button>
                 </div>
 
             </div>
-            <div className=" flex justify-center gap-5 mt-3" >
+            <div className=" flex justify-center gap-5 mt-7" >
                 <button
                     onClick={() => {
                         navigate('/user/update')
-                    }} className=" text-(--secondary-color) bg-(--primary-color) border-2 border-(--primary-color) hover:bg-(--bg-color) px-10 py-5 rounded-3xl cursor-pointer">Update
+                    }} className=" text-(--secondary-color) bg-(--bg-color) border-2 border-(--primary-color) hover:bg-(--primary-color) px-6 py-5 rounded-4xl cursor-pointer">
+                    <img src="/navIcons/update.svg" alt="" />
                 </button>
                 <button
                     onClick={() => {
                         navigate('/interactions')
-                    }} className=" text-(--secondary-color) bg-(--primary-color) border-2 border-(--primary-color) hover:bg-(--bg-color) px-10 py-5 rounded-3xl cursor-pointer">Find Match
+                    }} className=" text-(--secondary-color) bg-(--bg-color) border-2 border-(--primary-color) hover:bg-(--primary-color) px-6 py-5 rounded-4xl cursor-pointer">
+                    <img src="/navIcons/search.svg" alt="" />
                 </button>
             </div>
         </>
