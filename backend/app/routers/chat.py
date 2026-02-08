@@ -45,8 +45,13 @@ def show_chats(db:Session = Depends(get_db),
 
         results.append({
             "chat_id":chat.id,
-            "user1":current_user_id,
-            "user2":other_user.id
+            "current_user":current_user_id,
+            "other_user":{
+                "id":other_user.id,
+                "username":other_user.username,
+                "name":other_user.name,
+                "photo":other_user.photo
+            },
         })
 
     return results

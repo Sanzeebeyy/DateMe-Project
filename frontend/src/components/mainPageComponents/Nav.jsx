@@ -21,7 +21,9 @@ function Nav() {
                         </button>
                     </li>
                     <li>
-                        <button>
+                        <button onClick={() => {
+                            navigate('/chat')
+                        }}>
                             <img src="/navIcons/chat.svg" alt="" />
                         </button>
                     </li>

@@ -9,6 +9,7 @@ import UpdateUser from './pages/updateUser'
 import UploadPhoto from './pages/uploadPhoto'
 import Matches from './pages/matchesPage'
 import ShowUser from './pages/userPage'
+import Chat from './pages/chatPage'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/user/upload-photo" element={<UploadPhoto />} />
           <Route path="/user" element={<ShowUser />} />
           <Route path="/matches" element={<Matches />} />
+          <Route path="/chat" element={<Chat />} />
           
         </Route>
 
