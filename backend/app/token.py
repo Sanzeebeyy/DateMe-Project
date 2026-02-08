@@ -11,7 +11,7 @@ get_db = database.get_db
 
 SECRET_KEY = "afc272d9efa4a8a16df8109486cd6a06223ee12fc71e0383a7648f8d743b57db"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRY_MINUTES = 60
+ACCESS_TOKEN_EXPIRY_MINUTES = 9999999
 
 def create_access_token(data:dict, expiry_delta: timedelta | None = None):
     to_encode = data.copy()
