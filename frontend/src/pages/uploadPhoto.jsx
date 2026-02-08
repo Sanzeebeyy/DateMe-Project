@@ -28,7 +28,7 @@ function UploadPhoto() {
         try {
             const response = await api.post('/user/upload-photo', formData)
             console.log(response)
-            navigate('/interactions')
+            navigate('/user')
         } catch (err) {
             setError("Upload Failed")
         }finally{

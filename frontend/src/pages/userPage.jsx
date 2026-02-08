@@ -2,40 +2,40 @@ import { useEffect, useState } from "react"
 import api from "../api/axios.js";
 import { useNavigate } from "react-router";
 import Nav from "../components/mainPageComponents/Nav.jsx";
-function ShowUser(){
+function ShowUser() {
 
-    const navigate  = useNavigate()
-    
+    const navigate = useNavigate()
+
     const [user, setUser] = useState({})
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("ma")
         showUser()
     }, [])
-    
+
     const showUser = async () => {
-            try{
-                console.log("malai bolako ho")
-                const response =  await api.get('/user')
-                console.log("fetch")
-                console.log(response.data)
-                setUser(response.data)
+        try {
+            console.log("malai bolako ho")
+            const response = await api.get('/user')
+            console.log("fetch")
+            console.log(response.data)
+            setUser(response.data)
 
-            }catch(error){
-                console.log("Error in Users")
-            }
+        } catch (error) {
+            console.log("Error in Users")
         }
+    }
 
- 
-    
-    
+
+
+
     return (
 
         <>
 
-        <Nav/>
-        {/* <div className="text-3xl text-center text-(--secondary-color) font-bold mt-3">You look like this to others</div> */}
-        <div className="mx-auto mt-10 w-104 rounded-3xl border-6 border-(--primary-color) bg-(--bg-color) shadow-2xl overflow-hidden">
+            <Nav />
+            {/* <div className="text-3xl text-center text-(--secondary-color) font-bold mt-3">You look like this to others</div> */}
+            <div className="mx-auto mt-10 w-104 rounded-3xl border-6 border-(--primary-color) bg-(--bg-color) shadow-2xl overflow-hidden">
 
 
                 <div className="relative h-136 overflow-hidden">{console.log(user)}
@@ -67,7 +67,7 @@ function ShowUser(){
                 <div className="flex justify-around py-6">
                     <button
                         className="flex h-16 w-16 items-center justify-center rounded-full bg-red-500 text-(--secondary-color) text-2xl shadow-xl transition hover:scale-110 hover:bg-red-600 cursor-pointer"
-                        onClick={()=>{
+                        onClick={() => {
                             onAction('reject')
                         }}
                     >
@@ -76,21 +76,28 @@ function ShowUser(){
 
                     <button
                         className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500 text-(--secondary-color) text-2xl shadow-xl transition hover:scale-110 hover:bg-green-600 cursor-pointer"
-                        onClick={()=>{
+                        onClick={() => {
                             onAction('like')
                         }}
                     >
                         <img src="navIcons\like.svg" alt="" />
                     </button>
                 </div>
-                
+
             </div>
-            <div className=" flex justify-center mt-3" onClick={()=>{
-                navigate('/user/update')
-            }}>
-                    <button className=" text-(--secondary-color) bg-(--primary-color) border-2 border-(--primary-color) hover:bg-(--bg-color) px-10 py-5 rounded-3xl cursor-pointer">Update</button>
-                </div>
-            </>
+            <div className=" flex justify-center gap-5 mt-3" >
+                <button
+                    onClick={() => {
+                        navigate('/user/update')
+                    }} className=" text-(--secondary-color) bg-(--primary-color) border-2 border-(--primary-color) hover:bg-(--bg-color) px-10 py-5 rounded-3xl cursor-pointer">Update
+                </button>
+                <button
+                    onClick={() => {
+                        navigate('/interactions')
+                    }} className=" text-(--secondary-color) bg-(--primary-color) border-2 border-(--primary-color) hover:bg-(--bg-color) px-10 py-5 rounded-3xl cursor-pointer">Find Match
+                </button>
+            </div>
+        </>
     )
 }
 
